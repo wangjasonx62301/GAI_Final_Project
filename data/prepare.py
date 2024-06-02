@@ -33,6 +33,14 @@ def preprocess_text(text):
         
     return tokens
 
+def load_tokenized_text(path=None):
+    
+    if path == None: path = 'CXIRG_Data\\train_data\\reports.xlsx'
+    report = pd.read_excel(path, engine='openpyxl')
+    report_texts = report['text'].apply(preprocess_text)
+    return report_texts
+
+
 def create_dict(df):
     vocab_dict = {}
     for row in df:
@@ -92,9 +100,10 @@ class CustomReportDataset(Dataset):
 def CustomBlockSeq2Batch(df, block_size, batch_size, threshold=50, device=None, target_idx=None):
     
     ### get rid of the sequence that len < threshold
-    # n_df = []
-    # for idx, data in enumerate(df):
-    #     if len(data) >= threshold: n_df.append(data)
+    n_df = []
+    for idx, data in enumerate(df):
+        if len(data) >= threshold: n_df.append(data)
+    df = n_df
     
     # get random batch
     if target_idx == None: target_idx = random.randint(0, len(df) - 1)
