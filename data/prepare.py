@@ -33,19 +33,28 @@ def preprocess_text(text):
         
     return tokens
 
-def load_tokenized_text(path=None):
+def load_tokenized_text(split=None, path=None):
     
-    if path == None: path = 'CXIRG_Data\\train_data\\reports.xlsx'
+    if path == None and split==None: path = 'CXIRG_Data\\train_data\\reports.xlsx'
+    elif path == None:
+        assert split in [None, 'train', 'valid']
+        path = {
+            'train' : 'CXIRG_Data\\train_data\\reports.xlsx',
+            'valid' : 'CXIRG_Data\\valid_data\\reports.xlsx'
+        }[split]
     report = pd.read_excel(path, engine='openpyxl')
     report_texts = report['text'].apply(preprocess_text)
     return report_texts
 
 
-def create_dict(df):
+def create_dict():
     vocab_dict = {}
-    for row in df:
-        for token in row:
-            vocab_dict[token] = vocab_dict.get(token, 0) + 1
+    for split in ['train', 'valid']:
+        df = load_tokenized_text(split)
+        for row in df:
+            for token in row:
+                vocab_dict[token] = vocab_dict.get(token, 0) + 1
+    
     sorted_dict = {k: v for k, v in sorted(vocab_dict.items(), key=lambda item: item[1], reverse=True)}
     return sorted_dict
 
@@ -75,16 +84,19 @@ class CustomTokenizer():
     
 class CustomReportDataset(Dataset):
     
-    def __init__(self, text_df, split='train', word_dict=None):
+    def __init__(self, split='train', word_dict=None):
         assert split in ['train', 'valid', 'test']
-        n_samples = {
-            'train' : len(text_df) * 0.9,
-            'valid' : len(text_df) * 0.1,
-            'test' : len(text_df),
+        path = {
+            'train' : 'CXIRG_Data\\train_data\\reports.xlsx',
+            'valid' : 'CXIRG_Data\\valid_data\\reports.xlsx',
+            'test'  : 'unknown',
         }[split]
+        text_df = load_tokenized_text(path=path)
         if type(text_df) is not list:
             text_df = list(text_df)
-        self.df = random.sample(text_df, int(n_samples))
+        if word_dict is None:
+            word_dict = create_dict()
+        self.df = text_df
         self.tokenizer = CustomTokenizer(word_dict)
         
     def __getitem__(self, index) :
@@ -97,20 +109,21 @@ class CustomReportDataset(Dataset):
         return len(self.df)
         
         
-def CustomBlockSeq2Batch(df, block_size, batch_size, threshold=50, device=None, target_idx=None):
+def CustomBlockSeq2Batch(df, config, target_idx=None, valid=False):
     
     ### get rid of the sequence that len < threshold
-    n_df = []
-    for idx, data in enumerate(df):
-        if len(data) >= threshold: n_df.append(data)
-    df = n_df
+    if valid == False:
+        n_df = []
+        for idx, data in enumerate(df):
+            if len(data) >= config.threshold: n_df.append(data)
+        df = n_df
     
     # get random batch
     if target_idx == None: target_idx = random.randint(0, len(df) - 1)
-    ix = torch.randint(len(df[target_idx]) - block_size, (batch_size, ))
-    ix[0] = 0                                 # test for make sure CLS
-    x = torch.stack([df[target_idx][i:i+block_size] for i in ix])
-    y = torch.stack([df[target_idx][i+1:i+block_size+1] for i in ix])
-    x, y = x.to(device), y.to(device)
+    ix = torch.randint(len(df[target_idx]) - config.block_size, (config.batch_size, ))
+    # ix[0] = 0                                 # test for make sure CLS
+    x = torch.stack([df[target_idx][i:i+config.block_size] for i in ix])
+    y = torch.stack([df[target_idx][i+1:i+config.block_size+1] for i in ix])
+    x, y = x.to(config.device), y.to(config.device)
     return x, y
 

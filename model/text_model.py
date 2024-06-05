@@ -3,17 +3,37 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 import math
+from utils.config import config
+
+
+class SinusoidalEmbedding(nn.Module):
+    
+    def __init__(self, config):
+        super().__init__()
+        self.emb_wei = torch.zeros(config.block_size, config.n_embd)
+        wei = torch.tensor([1 / 10000 ** (2 * j / config.n_embd) for j in range(config.n_embd)]).view(1, config.n_embd)
+        t = torch.arange(config.block_size).view(config.block_size, 1)
+        # even idx embedding
+        self.emb_wei[:, ::2] = torch.sin(t * wei[:, ::2])
+        self.emb_wei[:, 1::2] = torch.cos(t * wei[:, ::2])
+        
+        self.embedding = nn.Embedding(config.block_size, config.n_embd)
+        self.embedding.weight.data = self.emb_wei
+        
+    def forward(self, x):
+        out = self.embedding(x)
+        return out
 
 class MultiHeadAttention(nn.Module):
     
-    def __init__(self, n_head, n_embd):
+    def __init__(self, config):
         super().__init__()
         
-        self.n_embd = n_embd
-        self.n_head = n_head
+        self.n_embd = config.n_embd
+        self.n_head = config.n_head
         
-        self.c_attn = nn.Linear(n_embd, n_embd * 3)
-        self.c_proj = nn.Linear(n_embd, n_embd)
+        self.c_attn = nn.Linear(config.n_embd, config.n_embd * 3)
+        self.c_proj = nn.Linear(config.n_embd, config.n_embd)
         
     def forward(self, x):
         
@@ -41,12 +61,12 @@ class MultiHeadAttention(nn.Module):
     
 class FeedForward(nn.Module):
     
-    def __init__(self, n_embd, dropout=0.3):
+    def __init__(self, config, dropout=0.3):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(n_embd, 4 * n_embd),
+            nn.Linear(config.n_embd, 4 * config.n_embd),
             nn.ReLU(),
-            nn.Linear(4 * n_embd, n_embd),
+            nn.Linear(4 * config.n_embd, config.n_embd),
             nn.Dropout(dropout),
         )
     
@@ -55,13 +75,13 @@ class FeedForward(nn.Module):
     
 class Block(nn.Module):
     
-    def __init__(self, n_embd, n_head):
+    def __init__(self, config):
         super().__init__()
-        head_size = n_embd // n_head
-        self.sa = MultiHeadAttention(n_head, n_embd)
-        self.ffwd = FeedForward(n_embd)
-        self.ln1 = nn.LayerNorm(n_embd)
-        self.ln2 = nn.LayerNorm(n_embd)
+        head_size = config.n_embd // config.n_head
+        self.sa = MultiHeadAttention(config)
+        self.ffwd = FeedForward(config)
+        self.ln1 = nn.LayerNorm(config.n_embd)
+        self.ln2 = nn.LayerNorm(config.n_embd)
         
         
     def forward(self, x):
@@ -72,15 +92,17 @@ class Block(nn.Module):
     
 class Decoder(nn.Module):
     
-    def __init__(self, vocab_size, block_size, n_embd, n_head, device, n_layer=8):
+    def __init__(self, config, sinusoidal_embedding=False):
         super().__init__()
-        self.token_embedding_table = torch.nn.Embedding(vocab_size, n_embd)
-        self.position_embedding_table = torch.nn.Embedding(block_size, n_embd)
+        self.token_embedding_table = torch.nn.Embedding(config.vocab_size, config.n_embd)
+        if sinusoidal_embedding == True:
+            self.position_embedding_table = SinusoidalEmbedding(config.block_size, config.n_embd)
+        else : self.position_embedding_table = torch.nn.Embedding(config.block_size, config.n_embd)
         
-        self.blocks = nn.Sequential(*[Block(n_embd, n_head=n_head) for _ in range(n_layer)])
-        self.lm_head = nn.Linear(n_embd, vocab_size)
-        self.device = device
-        self.block_size = block_size
+        self.blocks = nn.Sequential(*[Block(config) for _ in range(config.n_layer)])
+        self.lm_head = nn.Linear(config.n_embd, config.vocab_size)
+        self.device = config.device
+        self.block_size = config.block_size
         
     def forward(self, idx, targets=None):
         
