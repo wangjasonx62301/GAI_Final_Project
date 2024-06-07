@@ -5,7 +5,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset
 import random
-import math
 
 def preprocess_text(text):
     # get start token
@@ -54,8 +53,8 @@ def create_dict():
         for row in df:
             for token in row:
                 vocab_dict[token] = vocab_dict.get(token, 0) + 1
-    
-    sorted_dict = {k: v for k, v in sorted(vocab_dict.items(), key=lambda item: item[1], reverse=True)}
+    vocab_dict['[PAD]'] = 0
+    sorted_dict = {k: v for k, v in sorted(vocab_dict.items(), key=lambda item: item[1])}
     return sorted_dict
 
 # word tokenize (may change other tokenize method)
@@ -84,7 +83,7 @@ class CustomTokenizer():
     
 class CustomReportDataset(Dataset):
     
-    def __init__(self, split='train', word_dict=None):
+    def __init__(self, split='train', word_dict=None, encoder_term=False, config=None):
         assert split in ['train', 'valid', 'test']
         path = {
             'train' : 'CXIRG_Data\\train_data\\reports.xlsx',
@@ -98,10 +97,16 @@ class CustomReportDataset(Dataset):
             word_dict = create_dict()
         self.df = text_df
         self.tokenizer = CustomTokenizer(word_dict)
+        self.encoder_term = encoder_term
+        self.config = config
         
     def __getitem__(self, index) :
         target = self.df[index]
         target = torch.tensor(self.tokenizer.encode(target))
+        if self.encoder_term == True:
+            if len(target) < self.config.max_padding:
+                target = F.pad(target, (0, self.config.max_padding - len(target)), value=self.config.stoi['[PAD]'])
+            else: target = target[:self.config.max_length]
         return target
         
     # def decode(self, tokens):

@@ -8,16 +8,16 @@ from utils.config import config
 
 class SinusoidalEmbedding(nn.Module):
     
-    def __init__(self, config):
+    def __init__(self, block_size, n_embd):
         super().__init__()
-        self.emb_wei = torch.zeros(config.block_size, config.n_embd)
-        wei = torch.tensor([1 / 10000 ** (2 * j / config.n_embd) for j in range(config.n_embd)]).view(1, config.n_embd)
-        t = torch.arange(config.block_size).view(config.block_size, 1)
+        self.emb_wei = torch.zeros(block_size, n_embd)
+        wei = torch.tensor([1 / 10000 ** (2 * j / n_embd) for j in range(n_embd)]).view(1, n_embd)
+        t = torch.arange(block_size).view(block_size, 1)
         # even idx embedding
         self.emb_wei[:, ::2] = torch.sin(t * wei[:, ::2])
         self.emb_wei[:, 1::2] = torch.cos(t * wei[:, ::2])
         
-        self.embedding = nn.Embedding(config.block_size, config.n_embd)
+        self.embedding = nn.Embedding(block_size, n_embd)
         self.embedding.weight.data = self.emb_wei
         
     def forward(self, x):
@@ -148,17 +148,17 @@ class Decoder(nn.Module):
 
 class Encoder(nn.Module):
     
-    def __init__(self, config, sinusoidal_embedding=True):
+    def __init__(self, config, sinusoidal_embedding=False):
         super().__init__()
         self.token_embedding_table = torch.nn.Embedding(config.vocab_size, config.n_embd)
         if sinusoidal_embedding == True:
-            self.position_embedding_table = SinusoidalEmbedding(config.block_size, config.n_embd)
-        else : self.position_embedding_table = torch.nn.Embedding(config.block_size, config.n_embd)
+            self.position_embedding_table = SinusoidalEmbedding(config.max_padding, config.n_embd)
+        else : self.position_embedding_table = torch.nn.Embedding(config.max_padding, config.n_embd)
         # make sure encoder term
         self.blocks = nn.Sequential(*[Block(config, encoder_term=True) for _ in range(config.n_layer)])
-        self.lm_head = nn.Linear(config.n_embd, config.vocab_size)
+        self.lm_head = nn.Linear(config.n_embd, config.encoder_fan_out)
         self.device = config.device
-        self.block_size = config.block_size
+        self.block_size = config.max_padding
         
     def forward(self, idx, targets=None):
         
@@ -170,14 +170,9 @@ class Encoder(nn.Module):
         
         x = self.blocks(x)
         logits = self.lm_head(x) # (B, T, vocab_size)
-        
         if targets == None:
             loss = None
         else:
-            
-            B, T, C = logits.shape
-            logits = logits.view(B*T, C)
-            targets = targets.view(B*T)
             loss = F.cross_entropy(logits, targets)
         
         return logits, loss
