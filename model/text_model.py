@@ -169,7 +169,7 @@ class Encoder(nn.Module):
         x = tok_emb + pos_emb # (B, T, C)
         
         x = self.blocks(x)
-        logits = self.lm_head(x) # (B, T, vocab_size)
+        logits = self.lm_head(x) # (B, T, fan_out(14))
         if targets == None:
             loss = None
         else:
