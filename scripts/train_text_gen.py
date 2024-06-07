@@ -33,13 +33,18 @@ def train_gen(model, optim):
             losses = estimate_loss(model)
             print(f"step {iter:5d}: train loss {losses['train']:.4f}, val loss {losses['valid']:.4f}")
         
-        xb, yb = CustomBlockSeq2Batch(df, config, target_idx=iter%len(df))
+        if iter % config.checkpoint == 0 and iter > 0:
+            generate_report(model, context=None)
+            torch.save(model.state_dict(), f'text_gen_train_for_{iter}_iters.pt')
+            
+        xb, yb = CustomBlockSeq2Batch(df, config)
         logits, loss = model(xb, yb)
         optim.zero_grad(set_to_none=True)
         loss.backward()
         optim.step()
         # break                           # for testing
     
+    torch.save(model.state_dict(), f'text_gen_train_for_{config.max_iters}_iters.pt')
     model.eval()
     
 def generate_report(model, context=None):
@@ -50,4 +55,10 @@ def generate_report(model, context=None):
     context = preprocess_text(context)
     context_tokens = encode(context)
     context = torch.tensor([context_tokens], dtype=torch.long, device=config.device)
-    print(decode(model.generate(context, max_new_tokens=50)[0].tolist()))
+    print(decode(model.generate(context, max_new_tokens=60)[0].tolist()))
+
+def load_checkpoint(model, path=None):
+    assert path is not None
+    model.load_state_dict(torch.load(path))
+    model.eval()
+    return model
