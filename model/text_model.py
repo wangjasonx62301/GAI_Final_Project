@@ -26,7 +26,7 @@ class SinusoidalEmbedding(nn.Module):
 
 class MultiHeadAttention(nn.Module):
     
-    def __init__(self, config):
+    def __init__(self, config, encoder_term=False):
         super().__init__()
         
         self.n_embd = config.n_embd
@@ -34,6 +34,10 @@ class MultiHeadAttention(nn.Module):
         
         self.c_attn = nn.Linear(config.n_embd, config.n_embd * 3)
         self.c_proj = nn.Linear(config.n_embd, config.n_embd)
+        
+        self.register_buffer('bias', torch.tril(torch.ones(config.block_size, config.block_size))
+                             .view(1, 1, config.block_size, config.block_size))
+        self.encoder_term = encoder_term
         
     def forward(self, x):
         
@@ -52,6 +56,9 @@ class MultiHeadAttention(nn.Module):
         # the formula : softmax(QK^T / sqrt(embd_dim(k)))V
         # shape after q @ k : (B, n_head, T, T) 
         attn = q @ k.transpose(-2, -1) * (1 / math.sqrt(self.n_embd * 3 // self.n_head))
+        # encoder
+        if self.encoder_term == False:
+            attn = attn.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))
         attn = F.softmax(attn, dim=-1)
         # shape after attn @ v : (B, n_head, T, C // n_head)
         y = attn @ v
@@ -75,10 +82,10 @@ class FeedForward(nn.Module):
     
 class Block(nn.Module):
     
-    def __init__(self, config):
+    def __init__(self, config, encoder_term=False):
         super().__init__()
         head_size = config.n_embd // config.n_head
-        self.sa = MultiHeadAttention(config)
+        self.sa = MultiHeadAttention(config, encoder_term=encoder_term)
         self.ffwd = FeedForward(config)
         self.ln1 = nn.LayerNorm(config.n_embd)
         self.ln2 = nn.LayerNorm(config.n_embd)
@@ -138,4 +145,39 @@ class Decoder(nn.Module):
             idx = torch.cat((idx, idx_next), dim=1) # (B, T+1)
         return idx
     
+
+class Encoder(nn.Module):
+    
+    def __init__(self, config, sinusoidal_embedding=True):
+        super().__init__()
+        self.token_embedding_table = torch.nn.Embedding(config.vocab_size, config.n_embd)
+        if sinusoidal_embedding == True:
+            self.position_embedding_table = SinusoidalEmbedding(config.block_size, config.n_embd)
+        else : self.position_embedding_table = torch.nn.Embedding(config.block_size, config.n_embd)
+        # make sure encoder term
+        self.blocks = nn.Sequential(*[Block(config, encoder_term=True) for _ in range(config.n_layer)])
+        self.lm_head = nn.Linear(config.n_embd, config.vocab_size)
+        self.device = config.device
+        self.block_size = config.block_size
         
+    def forward(self, idx, targets=None):
+        
+        B, T = idx.shape
+        
+        tok_emb = self.token_embedding_table(idx)
+        pos_emb = self.position_embedding_table(torch.arange(T, device=self.device)) # (T, C)
+        x = tok_emb + pos_emb # (B, T, C)
+        
+        x = self.blocks(x)
+        logits = self.lm_head(x) # (B, T, vocab_size)
+        
+        if targets == None:
+            loss = None
+        else:
+            
+            B, T, C = logits.shape
+            logits = logits.view(B*T, C)
+            targets = targets.view(B*T)
+            loss = F.cross_entropy(logits, targets)
+        
+        return logits, loss
