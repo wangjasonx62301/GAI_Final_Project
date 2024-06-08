@@ -131,4 +131,3 @@ def CustomBlockSeq2Batch(df, config, target_idx=None, valid=False):
     y = torch.stack([df[target_idx][i+1:i+config.block_size+1] for i in ix])
     x, y = x.to(config.device), y.to(config.device)
     return x, y
-

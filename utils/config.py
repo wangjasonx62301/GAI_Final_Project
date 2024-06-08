@@ -1,6 +1,6 @@
 import torch
 from dataclasses import dataclass
-from model.text_model import *
+# from model.text_model import *
 from data.prepare import *
 
 
