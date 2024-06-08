@@ -16,7 +16,7 @@ class CombinedDataset(Dataset):
     def __init__(self, data, tokenizer, scaler, max_length=128):
         self.image_features = data[['class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6', 'class_7', 'class_8', 'class_9', 'class_10', 'class_11', 'class_12', 'class_13', 'class_14']].values
         self.texts = data['text'].values
-        self.labels = data['predicted class'].values
+        self.labels = data[['class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6', 'class_7', 'class_8', 'class_9', 'class_10', 'class_11', 'class_12', 'class_13', 'class_14']].values
         self.tokenizer = tokenizer
         self.scaler = scaler
         self.max_length = max_length
@@ -69,10 +69,13 @@ for epoch in range(config.max_iters):
     running_loss = 0.0
     for batch in train_loader:
         (image_features, text_features), labels = batch
+        print(labels.shape)
         image_features, text_features, labels = image_features.to(config.device), text_features.to(config.device), labels.to(config.device)
 
         optimizer.zero_grad()
         inputs = torch.cat((image_features, text_features), dim=1)
+        # inputs = image_features
+        print(inputs)
         outputs, loss = model(inputs, targets=labels)
         loss.backward()
         optimizer.step()
