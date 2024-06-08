@@ -73,9 +73,9 @@ for epoch in range(config.max_iters):
         image_features, text_features, labels = image_features.to(config.device), text_features.to(config.device), labels.to(config.device)
 
         optimizer.zero_grad()
-        inputs = torch.cat((image_features, text_features), dim=1)
-        # inputs = image_features
-        print(inputs)
+        # inputs = torch.cat((image_features, text_features), dim=1)
+        inputs = text_features
+        # print(inputs.shape)
         outputs, loss = model(inputs, targets=labels)
         loss.backward()
         optimizer.step()
