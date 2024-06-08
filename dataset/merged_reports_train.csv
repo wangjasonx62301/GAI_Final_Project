@@ -1,0 +1,771 @@
+name,predicted class,class_1,class_2,class_3,class_4,class_5,class_6,class_7,class_8,class_9,class_10,class_11,class_12,class_13,class_14,text
+NLP_CHEST_001,1,0.12720568,0.047020946,0.03416659,0.103731275,0.08648755,0.032457866,0.06802753,0.08712752,0.0938632,0.11431473,0.06326684,0.04183116,0.08648395,0.014015226,"Chest AP view showed:
+Impression: 
+-Cardiomegaly. 
+-Atherosclerotic aorta. 
+-Fibrotic lesion at right upper lung field.
+ Suspect bilateral lower lungs atelectasis and infiltration.
+-Spondylosis of thoracolumbar spine. 
+ Compression fracture of L2.
+-Old fractures at left ribs.
+"
+NLP_CHEST_003,4,0.09569976,0.041398462,0.050396178,0.14149736,0.08868068,0.042563837,0.03751297,0.0929412,0.0961954,0.10588704,0.049408685,0.041936252,0.10049904,0.0153832175,"Chest plain film view shows:
+Impression:
+-Increased both lung markings.
+ Bilateral lower lung atelectasis.
+-Left apical pleural thickening. 
+-Elevated right hemidiaphragm. 
+-Normal heart size. 
+-Mild DJD of spine. 
+-Clips in upper abdomen. 
+-S/P biliary stent insertion. 
+
+"
+NLP_CHEST_005,4,0.09813743,0.049827375,0.030142024,0.13598117,0.054206453,0.028811457,0.060551595,0.08042629,0.115462296,0.13243116,0.07710099,0.027246391,0.09013926,0.019536138,"Chest PA shows:
+Impression: 
+> Increased bilateral lung markings.
+> Suspect atelectasis in both lower lung fields.
+> Cardiomegaly. 
+> Atherosclerotic aorta. 
+> Spondylosis and scoliosis.
+> S/P NG and endotracheal tube. 
+  S/P Rt jugular CVC insertion. "
+NLP_CHEST_006,8,0.10061407,0.06555287,0.025662089,0.103502,0.10713001,0.044832375,0.03834468,0.11234536,0.10912178,0.06744349,0.061153796,0.05147902,0.09849587,0.014322642,"Chest plain film PA view shows:
+
+Borderline cardiomegaly.
+Atherosclerotic and tortuous thoracic aorta. 
+Increased bilateral lung markings. 
+S/P operation at left lung with suspected associated focal atelectasis.
+Blunting of left CP angle. 
+S/P cardiac pacemaker implantation.
+Spondylosis. 
+Surgical clips at LUQ abdomen.
+Recommend clinical correlation. "
+NLP_CHEST_007,4,0.08260399,0.05160887,0.033941884,0.13746312,0.072481394,0.037271947,0.044788882,0.11007503,0.12432653,0.10402616,0.066747345,0.05109222,0.073394075,0.010178538,"Chest PA view shows: 
+
+Pneumoperitoneum.
+
+Consolidation at left lower lung field. 
+Left pleural effusion.
+
+Suspect pulmonary congestion. 
+Normal heart size. 
+"
+NLP_CHEST_008,4,0.109650895,0.05948965,0.02739637,0.112973124,0.07890707,0.033721883,0.055446662,0.10159302,0.111488126,0.078390814,0.058550544,0.049954414,0.10643096,0.016006459,"Chest PA view shows: 
+
+S/P port-A implantation via left subclavian vein. 
+
+Mass consolidation at left lower lung field. 
+Blunting of left costophrenic angle.
+
+Enlarged cardiac silhouette. 
+
+Heterogeneous bone density and partial collapse of T9 and T11 vertebrae.
+"
+NLP_CHEST_009,10,0.08832303,0.051039945,0.04047534,0.10207474,0.058709733,0.026780171,0.05956266,0.124899834,0.096756585,0.1388965,0.077224776,0.041574713,0.07529752,0.018384466,"Chest AP view shows: 
+
+Diffuse ill-defined patchy opacities at bilateral lungs.
+Consolidation at left lower lung field. 
+Left pleural effusion.
+
+Normal heart size. 
+Atherosclerosis of aorta. 
+
+Presence of NG tube insertion. 
+"
+NLP_CHEST_012,4,0.08690782,0.057980195,0.041191496,0.11768924,0.09747851,0.04777069,0.047498807,0.06368881,0.06192384,0.09813364,0.090724036,0.05530738,0.11347823,0.02022742,"Chest AP view showed:
+1.s/p sternotomy.
+  Enlarged heart size with tortuous aorta. 
+2.Bilateral lung reticulonodular infiltrations.
+  L't upper and middle lung patches.
+  L't lower lung consolidation.
+  L't pleural thickening and effusion.
+  s/p L't intrapleural pigtail drainage.
+3.No mediastinum widening.
+"
+NLP_CHEST_013,9,0.083495416,0.06718796,0.03880299,0.09510663,0.075938396,0.037986368,0.036178194,0.058633313,0.16450095,0.112206444,0.06293294,0.042377584,0.10625184,0.018400928,"Chest X ray: 
+
+- No obvious lung mass nor consolidation patch.
+- Normal heart size.
+- No pleural effusion. "
+NLP_CHEST_014,9,0.0834384,0.060403112,0.040030736,0.1280364,0.07142867,0.04078421,0.028054764,0.08971313,0.18453604,0.09540385,0.038454674,0.032942753,0.09235122,0.014422014,"Chest X ray: 
+
+- No obvious lung mass nor consolidation patch.
+- Normal heart size.
+- No pleural effusion. "
+NLP_CHEST_016,4,0.11680602,0.056480326,0.038199082,0.13276571,0.081924096,0.037961088,0.031766508,0.077909805,0.11733834,0.084254734,0.064444534,0.032877598,0.112945125,0.014327041,"Chest PA view shows:
+>No obvious lung mass nor consolidation patch.
+>Normal heart size.
+>No pleural effusion. "
+NLP_CHEST_017,8,0.07846897,0.052600957,0.033533536,0.117266685,0.07220929,0.03302189,0.037495013,0.14401871,0.14325616,0.07779613,0.036458764,0.04391554,0.11256229,0.017396135,"Chest PA view shows:
+>No obvious lung mass nor consolidation patch.
+>Normal heart size.
+>No pleural effusion. "
+NLP_CHEST_018,4,0.10022084,0.057151243,0.037503555,0.15306878,0.06516143,0.035219572,0.041734006,0.079424866,0.11968132,0.09101057,0.07748703,0.0371658,0.084407054,0.020763917,"Chest PA view shows:
+>No obvious lung mass nor consolidation patch.
+>Normal heart size.
+>No pleural effusion. "
+NLP_CHEST_019,9,0.084977895,0.061495017,0.036016874,0.12029513,0.09286632,0.032894455,0.060752623,0.10395649,0.12124566,0.07264753,0.053996157,0.037999194,0.10140087,0.019455852,"Chest film showed
+IMP:
+1) One mass on right upper lung.
+   Focal ground-glass opacity on right middle lung.
+   Elevation of right hemidiaphragm.
+2) Normal heart shadow with calcified aortic arch.
+3) Osteophytes of the spine with scoliosis.
+   Sclerotic change on L4, favor bone metastasis.
+4) Surgical clips on upper abdomen."
+NLP_CHEST_020,4,0.08814062,0.057968564,0.048757434,0.1428393,0.06874415,0.029785793,0.05713236,0.10595884,0.072119385,0.11623851,0.07427583,0.03651406,0.08066045,0.020864736,"Chest AP view showed:
+1.Enlarged heart size with tortuous aorta.
+2.Bilateral lung reticulonodular infiltrations.
+  A R't upper lung mass. 
+  R't middle and lower lung faint patches.
+3.No mediastinum widening.
+4.s/p R't jugular CVP.
+"
+NLP_CHEST_021,4,0.06606406,0.07333646,0.03776869,0.1327825,0.074305974,0.048022673,0.04147221,0.10340004,0.07394891,0.13221952,0.09148204,0.03714568,0.06642102,0.021630216,"Chest AP view showed:
+1.Enlarged heart size with tortuous aorta.
+2.Bilateral lung reticulonodular infiltrations.
+  R't upper and middle lung faint patches.
+  A L't upper lung mass. 
+  L't retrocardiac patches.
+  L't upper pleura thickening. 
+  s/p L't intrapleural pigtail drainage.
+3.No mediastinum widening.
+4.s/p L't subclavian port-A implantation and
+  NG intubation.
+"
+NLP_CHEST_022,4,0.057595402,0.04767277,0.029716479,0.20775352,0.065550566,0.024851969,0.045170747,0.07373245,0.10208784,0.12666209,0.0727509,0.031550452,0.09001122,0.024893502," 
+
+Chest plain film view showed:
+Impression:
+-Suspect right upper lung mass
+ Bilateral hilar enlargement. 
+ Bilateral lung metastasis.
+-Normal heart size.
+-DJD of spine. "
+NLP_CHEST_023,9,0.08591635,0.058207557,0.041815747,0.12141941,0.07025501,0.03669731,0.043888986,0.11392592,0.13466229,0.093548276,0.0469868,0.046849843,0.084929265,0.020897264,"Chest PA view shows:
+
+Impression:
+- Left upper medial lung mass with calcified nodule.
+- Faint fibrotic and nodular infiltration in the right upper lung.
+  Left lower lateral lung small calcified nodule.
+- Normal heart size with atherosclerotic aorta. 
+- No mediastinal widening.
+- Both costophrenic angles are sharp.
+- Spondylosis of spine. 
+  Old fracture of left 3rd and 4th ribs.
+"
+NLP_CHEST_024,8,0.10429297,0.05445096,0.04032422,0.10832516,0.06397964,0.03315308,0.036180224,0.13931793,0.11767221,0.09094214,0.042635374,0.046285056,0.104578026,0.017863145,"Chest PA view shows: 
+
+Large mass occupying right upper chest.
+
+Normal heart size. 
+"
+NLP_CHEST_025,4,0.061035994,0.04827815,0.048204795,0.16657473,0.08866911,0.04276531,0.045123536,0.0897102,0.09920028,0.065656915,0.06886736,0.042367946,0.11324951,0.02029623,"Chest film showed
+IMP:
+1) Surgery and post-radiotherapy left medial lung fibrosis and elevation of left hemidiaphragm.
+   Interstitial infiltrations on bilateral lower lung.
+   Blunting left CP angle. 
+2) Normal heart shadow with calcified aortic arch.
+3) Osteophytes of the spine.
+4) One port A on SVC level."
+NLP_CHEST_026,4,0.09060477,0.05449276,0.036590904,0.15817645,0.07671357,0.033818696,0.037316747,0.13886012,0.09670106,0.08278731,0.060691323,0.033303645,0.08492472,0.015017929,"Chest PA View:
+Impression: 
+> Postinflammatory fibrosis in both upper lungs.
+> Atherosclerosis of aorta.
+> R/O osteoporosis.
+> DJD of spine. 
+> S/P abdominal operation with retained clips."
+NLP_CHEST_028,4,0.09645411,0.06902363,0.026073847,0.12108493,0.09023326,0.03370413,0.065591425,0.09103003,0.10945121,0.07934726,0.06220205,0.060696322,0.07763815,0.017469663,"Chest PA View:
+Impression: 
+> Reticular infiltration in the bilateral lower lungs.
+> Suspect bilateral lower lung patches. 
+> Bilateral lung emphysematous change.
+> Right apical pleural thickening and fibrosis.
+> Blunting bilateral CP angles. 
+> Borderline cardiomegaly.
+> Atherosclerosis of aorta.
+> R/O osteoporosis.
+> Spondylosis of thoracolumbar spine."
+NLP_CHEST_029,4,0.108120725,0.059101626,0.042378485,0.1669186,0.058832344,0.037151348,0.060402833,0.057324592,0.083924055,0.14471789,0.063379765,0.03890422,0.0597943,0.019049263,"Chest plain film shows:
+Impression:
+-Suspect right upper lung mass.
+-Suspect pulmonary fibrosis. 
+ Suspect right lower lung patch. 
+ Blunting bilateral CP angles. 
+-Increased infiltrations in both lungs.
+-Tortuous atherosclerotic dilated aorta. 
+-DJD of spine. 
+-S/P Rt jugular CVC insertion. "
+NLP_CHEST_030,4,0.08802692,0.0602015,0.04270959,0.16197532,0.051070843,0.035733376,0.068151765,0.08332929,0.07057083,0.15994586,0.04699849,0.044342376,0.068109415,0.01883441,"
+Chest plain film shows:
+Impression:
+-Suspect right upper lung mass.
+-Suspect pulmonary fibrosis. 
+ Suspect right lower lung patch. 
+ Blunting bilateral CP angles. 
+-Increased infiltrations in both lungs.
+-Tortuous atherosclerotic dilated aorta.
+-Cardiomegaly. 
+-DJD of spine. 
+-S/P Rt jugular CVC insertion. "
+NLP_CHEST_032,9,0.08186593,0.06928612,0.039327323,0.11045923,0.06511841,0.036721747,0.062033672,0.081373885,0.11950674,0.10928354,0.04243298,0.05811479,0.10540628,0.019069372,"Chest X ray: 
+
+- Obscured left costophrenic angle. 
+- Suspicious left middle lung nodule.
+- Obscured bilateral costophrenic angles. 
+- Tortuous atherosclerotic dilated aorta. 
+- Scoliosis, DJD and osteoporosis of spine.
+- Clips in right upper abdomen. 
+- S/P biliary stent.
+
+"
+NLP_CHEST_033,4,0.10153675,0.051254768,0.04630855,0.1411308,0.054596506,0.028668469,0.045047704,0.08885318,0.09978788,0.13955426,0.07472912,0.033201393,0.069385685,0.025945088,"
+Chest plain film view showed:
+Impression:
+-Suspicious right upper lung nodules.
+-Increased both lung markings.  
+-Suspicious left upper and bilateral lower lung patch. 
+-The mediastinum is not widened.
+-Normal heart size.
+-Atherosclerotic aorta. 
+-DJD of spine. 
+ Mild scoliosis of spine. 
+-S/P fixation in L-spine.  "
+NLP_CHEST_034,10,0.0875121,0.04676472,0.03513278,0.11143259,0.08794811,0.031625163,0.045449644,0.10513023,0.09383327,0.12553854,0.08705601,0.03349215,0.08875169,0.020332962,"Chest plain film AP view showed:
+Impression:
+-Right upper lung mass.
+ Bilateral lung nodules.
+ Compatible with Pulmonary TB.
+-Increased infiltrations in bilateral lungs. 
+-Blunting left CP angle. 
+-Atherosclerotic aorta. 
+-Scoliosis and DJD of spine. 
+-Normal heart size.
+-S/P Lt subclavian Port-A-cath.  
+-S/P NG tube insertion. "
+NLP_CHEST_036,10,0.09041764,0.08272061,0.025655305,0.115549445,0.04523119,0.027014114,0.021867914,0.09895057,0.10529679,0.19394419,0.07204012,0.023312442,0.08579018,0.012209592,"
+Chest film shows:
+
+Impression:
+-Bilateral lungs nodules, suspected metastasis. 
+-Blunting right CP angle. 
+-The heart shadow is not enlarged. 
+-Atherosclerotic aorta. 
+-Elevated right hemidiaphragm.
+-Spondylosis of thoracolumbar spine.
+-S/P Lt subclavian Port-A-cath. 
+-S/P right MRM."
+NLP_CHEST_037,4,0.071862645,0.05019441,0.038567435,0.17393947,0.06505073,0.039135642,0.055373903,0.07088964,0.085229434,0.10655272,0.083573096,0.036518145,0.10592871,0.017184047,"Chest plain film shows:
+Impression:
+-Increased infiltrates in both lungs. 
+-Blunting bilateral CP angles. 
+-Cardiomegaly. 
+-Atherosclerosis of aorta. 
+-Scoliosis and DJD of spine. 
+-Bilateral apical pleural thickening. 
+"
+NLP_CHEST_038,10,0.076319136,0.06685781,0.04309216,0.07490865,0.080531076,0.03303753,0.035805248,0.111770086,0.12014506,0.14218253,0.044044144,0.04989164,0.10100747,0.020407347,"Chest plain film view showed:
+Impression:
+-Increased both lung markings. 
+-Bilateral hilar enlargement. 
+-Cardiomegaly. 
+-Atherosclerotic aorta. 
+-DJD of spine.
+-S/P fixation in T-L spine."
+NLP_CHEST_039,4,0.07825206,0.06023801,0.039552264,0.14773977,0.060889915,0.035745416,0.050652225,0.0636904,0.09606489,0.14382057,0.082522795,0.043339327,0.07710593,0.020386467,"Chest plain film shows:
+Impression:
+-Increased infiltrations in both lungs.
+-Blunting bilateral CP angles.
+ Elevated right hemidiaphragm. 
+-Tortuous atherosclerotic dilated aorta.
+-Cardiomegaly.
+-DJD of spine. 
+S/P fixation in L-spine. "
+NLP_CHEST_041,4,0.09155782,0.059090793,0.046178613,0.122683875,0.066706516,0.0365586,0.053786162,0.10666214,0.09840695,0.09770502,0.0636379,0.044184465,0.09480564,0.018035455,"Chest AP view showed:
+1.Borderline cardiomegaly with tortuous aorta.
+2.No active lung lesion.
+3.No mediastinum widening.
+"
+NLP_CHEST_042,8,0.09209517,0.045103993,0.033869103,0.11266153,0.047711354,0.029286327,0.037343036,0.12045925,0.10068483,0.118362285,0.11209592,0.031420875,0.10192258,0.016983686,"Chest plain film shows:
+Impression:
+-Suspicious right upper lung nodule.
+ Suspect left lower lung patch. 
+-Increased infiltrations in both lungs.
+-Blunting bilateral CP angles.
+-Tortuous atherosclerotic dilated aorta.
+-Cardiomegaly.
+-Scoliosis, DJD and osteoporosis of spine."
+NLP_CHEST_043,4,0.099857554,0.05864529,0.029008735,0.14705922,0.0907914,0.03312342,0.049494788,0.11997291,0.062477328,0.10765707,0.066197276,0.04471775,0.07638583,0.014611364,"Chest plain film  view showed:
+Impression:
+-Suspicious pulmonary edema. Superimposed pneumonia cannot be excluded.  
+-Tortuous atherosclerotic dilated aorta. Cardiomegaly. 
+-Scoliosis and DJD of spine. 
+-Right paratracheal shadow. R/O engorged SVC or tortuous Rt brachiocephalic artery. 
+-Blunting left CP angle. "
+NLP_CHEST_044,4,0.06270722,0.06706569,0.06392762,0.13621683,0.08465306,0.041740097,0.04710174,0.08004487,0.07928882,0.12525977,0.05140088,0.061775357,0.074180774,0.024637336,"Chest plain film view showed:
+Impression:
+-Suspicious pulmonary edema. Superimposed pneumonia cannot be excluded. 
+-Elevated right hemidiaphragm. 
+-The mediastinum is not widened.
+-Normal heart size.
+-DJD of spine.
+-S/P Lt subclavian Port-A-cath. "
+NLP_CHEST_045,10,0.08854205,0.07326338,0.037112392,0.10219446,0.060491223,0.024354469,0.045275778,0.11101142,0.11161193,0.1452088,0.06650534,0.036334485,0.07629317,0.021801116,"Chest PA view showed:
+Impression:
+-Suspicious pulmonary edema. Superimposed pneumonia cannot be excluded. 
+-Blunting bilateral CP angles. 
+-Normal heart size. Atherosclerosis of aorta. 
+-Spondylosis of spine. 
+-S/P NG and endotracheal tube. 
+ S/P Rt jugular CVC insertion. 
+"
+NLP_CHEST_046,4,0.106974505,0.048545755,0.04151816,0.20697533,0.05752568,0.03633582,0.039773878,0.06786688,0.123833984,0.08165742,0.052084565,0.04632301,0.06981592,0.020769259,"Chest Plain Film:
+
+> Bilateral pulmonary edema/pneumonia.
+> R/O left pleural effusion.
+> Atherosclerosis of aorta.
+> R/O osteoporosis.
+> R/O ankylosing spondylitis.
+> S/P cervicothoracic spine operation with internal fixations.
+> S/P NG and tracheostomy tubes."
+NLP_CHEST_047,4,0.09584423,0.0724201,0.031709936,0.15646486,0.04834673,0.04061787,0.040732887,0.105705746,0.095402,0.12699024,0.07063215,0.03956811,0.05926321,0.016301928,"Infiltration at bilateral lungs. Pulmonary edema. 
+"
+NLP_CHEST_049,4,0.07115924,0.041215736,0.046611447,0.20741306,0.07019961,0.02605486,0.047684617,0.09509046,0.09419993,0.124116115,0.05059317,0.04330414,0.07022097,0.012136555,"Chest AP view showed:
+1.Normal heart size with tortuous aorta.
+2.R't middle lung and L't lower lung 
+  reticulonodular infiltrations.
+  Mild L't pleural effusion.
+3.No mediastinum widening.
+4.s/p endotracheal tube and NG intubation.
+  s/p R't jugular CVP.
+"
+NLP_CHEST_050,10,0.10373411,0.044889025,0.026388774,0.12153524,0.082374655,0.034132924,0.060689095,0.081905074,0.0902712,0.14595398,0.06541257,0.031693757,0.09080931,0.020210328,"Chest PA view:
+Impression:
+-Increased both lung markings. 
+-Compatible with right lung nodules.
+-Fibrotic lesion in left upper lung.
+-Normal heart size. Atherosclerotic aorta. 
+-Suspect right pleural effusion.
+-Spondylosis. R/O osteoporosis. 
+-Compatible with multiple bony metastases.
+-S/P NG and endotracheal tube.
+-S/P Lt subclavian Port-A-cath. "
+NLP_CHEST_051,8,0.07265811,0.039498225,0.029188655,0.12601708,0.06776964,0.027646523,0.050036382,0.15269549,0.09688122,0.11244051,0.058538992,0.042675644,0.1087141,0.015239399,"Chest film shows:
+Impression:
+-S/P LUL lobectomy, RUL and RML wedge resection. 
+-Suspect left lower lung patch. 
+-Bilateral pleural effusions.
+-The heart shadow is not enlarged.
+-Atherosclerosis of aorta.
+-R/O osteoporosis.
+-DJD of spine.  
+-S/P Lt subclavian Port-A-cath. "
+NLP_CHEST_052,9,0.11978097,0.052595746,0.056796346,0.11480762,0.059473597,0.032383606,0.042971093,0.085407,0.12833348,0.11026128,0.050437618,0.044054978,0.086003706,0.016692998,"Chest AP view shows:
+Impression:
+-Bilateral lung centrilobular infiltrations. 
+Pulmonary TB cannot be excluded completely. 
+-Right pleural effusion.
+-The heart shadow is not enlarged.
+-S/P fixation in C-spine.
+-Atherosclerosis of aorta. 
+-Spondylosis. "
+NLP_CHEST_053,10,0.05384213,0.06945608,0.03711765,0.11914332,0.06649956,0.050112683,0.051684823,0.10305915,0.08277199,0.12848836,0.066699415,0.05987452,0.08602679,0.02522344,"Chest AP view shows:
+>Bilateral lung markings increased.
+>Mild left pleural effusion.
+>The heart shadow is enlarged.
+>The aortic shadow is atherosclerotic and tortuous. "
+NLP_CHEST_054,10,0.09454617,0.0582482,0.03958574,0.1322981,0.07989919,0.032390874,0.050029345,0.0763679,0.08650139,0.14827204,0.063969426,0.03963372,0.081195325,0.017062597,"
+Chest plain film shows:
+Impression:
+-Increased infiltrations in both lungs.
+-Left lung white out.
+-S/P left brachiocephalic vein stent.
+-Suspect left pleural effusion. 
+-Tortuous atherosclerotic dilated aorta. 
+-DJD of spine. "
+NLP_CHEST_055,9,0.08287082,0.04620735,0.051713265,0.097810626,0.07821198,0.030074805,0.09200288,0.098835036,0.11189183,0.09116982,0.058417052,0.057925668,0.085567206,0.01730165,"Chest plain film view showed:
+Impression:
+-Sutures in right upper chest. 
+ Susp. Rt pneumothorax. 
+-The mediastinum is not widened.
+-Normal heart size.
+-DJD of spine.
+-S/P right chest tube insertion. 
+-Subcutaneous emphysema in bilateral neck and left chest walls. 
+-Atherosclerotic aorta. "
+NLP_CHEST_056,8,0.092690945,0.044398155,0.04758029,0.10679654,0.06568916,0.02987457,0.042084165,0.12179415,0.11505117,0.1141512,0.057197742,0.047688622,0.0966607,0.018342521,"
+Chest film shows:
+Impression:
+-Diffuse linear infiltrates and small nodules at bilateral lungs.
+-Suspect bilateral lower lung patches.  
+-Right apical pleural thickening.
+-Blunting bilateral CP angles. 
+-Atherosclerotic aorta. 
+-DJD of spine.  
+-S/P NG and endotracheal tube. 
+ S/P left chest tube insertion. 
+-Subcutaneous emphysema in left chest wall. "
+NLP_CHEST_058,9,0.10226549,0.067214765,0.032830082,0.111730374,0.056136303,0.028685283,0.03267892,0.10257476,0.1449724,0.097876556,0.06446774,0.035188574,0.10216433,0.021214403,"Chest film showed
+IMP:
+1) One drainage tube on right lung, bluntening of right costophrenic angle, and subcutaneous emphysema of right chest wall.
+2) Normal heart shadow.
+3) Spur on the spine."
+NLP_CHEST_060,8,0.097175,0.064119674,0.029399423,0.08807482,0.08913628,0.031276427,0.0464284,0.15011822,0.12401845,0.07655467,0.039101105,0.056787044,0.08917528,0.018635163,"Chest plain film view showed:
+Impression:
+-Increased both lung markings. 
+ Blunting left CP angle. 
+-The mediastinum is not widened.
+-Normal heart size.
+-Atherosclerotic aorta. 
+-DJD of spine.
+Mild scoliosis of spine.
+-S/P left pleural pigtail tube. 
+Subcutaneous emphysema in left chest wall. "
+NLP_CHEST_061,9,0.066115014,0.064597756,0.043538168,0.13894418,0.074306674,0.031418633,0.037075043,0.12464706,0.14355901,0.07948223,0.056371726,0.02630806,0.09090607,0.02273029,"Chest plain film shows:
+
+Impression:
+-Suspicious right upper lung patch. 
+-Normal heart size. 
+-S/P repair for left diaphragmatic hernia.
+-S/P endotracheal tube insertion.
+ S/P OG tube insertion. 
+ S/P right arm PICC insertion. "
+NLP_CHEST_062,9,0.100229435,0.07494912,0.050150298,0.092996374,0.05693072,0.022184128,0.040409394,0.07744549,0.16639648,0.091240175,0.09171605,0.02425651,0.083657846,0.027438039,"
+Chest plain film shows:
+
+Impression:
+-Suspicious right upper lung patch. 
+-Normal heart size. 
+-S/P repair for left diaphragmatic hernia.
+-S/P endotracheal tube insertion.
+ S/P OG tube insertion. "
+NLP_CHEST_063,8,0.0950938,0.060938112,0.03154908,0.10972243,0.0975912,0.03892949,0.04935535,0.123962924,0.07686898,0.09347672,0.06316895,0.047250494,0.0964186,0.015673812,"Chest plain film shows:
+Impression:
+-Increased infiltrations in both lungs.
+-Suspicious right lower lung patch. 
+ Blunting bilateral CP angles. 
+-Tortuous atherosclerotic dilated aorta.
+-Suspect hiatal hernia 
+ S/P NG tube insertion. 
+-Scoliosis, DJD and osteoporosis of spine. 
+-S/P fixation in left clavicle. 
+ Compression fracture of T11,T12."
+NLP_CHEST_064,4,0.07538938,0.048908614,0.03212677,0.13469048,0.11646258,0.05536343,0.041680347,0.071563944,0.10856012,0.10837141,0.05501153,0.031031612,0.10073566,0.020104088,"Chest X ray PA view shows:
+Impression:
+- S/P sternotomy with wire fixation. 
+  Surgcial clips in Lt medial lung. 
+- Increased both lung markings. 
+- Blunting bilateral CP angles.
+- Clips in upper abdomen.
+- Suspicious hiatal hernia.
+- Calcified nodules in right upper abdomen.
+- Scoliosis and DJD of spine. 
+  Old fracture of right ribs."
+NLP_CHEST_065,9,0.068856604,0.06942416,0.039061096,0.09882629,0.074563056,0.027422605,0.042560373,0.10307387,0.13705848,0.12453088,0.05153739,0.030640047,0.10121523,0.031229928,"Chest plain film shows:
+Impression:
+-S/P operation for repair of left congenial diaphragmatic hernia. 
+-Bulging shadow of right paratracheal area and left atrium, probably due to thymus shadow. 
+-Coarsening of bilateral peribronchovascular bundles,favoring inflammatory process. "
+NLP_CHEST_066,4,0.07115924,0.041215736,0.046611447,0.20741306,0.07019961,0.02605486,0.047684617,0.09509046,0.09419993,0.124116115,0.05059317,0.04330414,0.07022097,0.012136555,"Chest AP view showed:
+1.Normal heart size with tortuous aorta.
+2.R't middle lung and L't lower lung 
+  reticulonodular infiltrations.
+  Mild L't pleural effusion.
+3.No mediastinum widening.
+4.s/p endotracheal tube and NG intubation.
+  s/p R't jugular CVP.
+"
+NLP_CHEST_067,9,0.101671144,0.048710395,0.043140694,0.110289335,0.07096623,0.029600725,0.04473247,0.08534861,0.16158415,0.095713325,0.05620242,0.046296466,0.09237439,0.013369773,"Chest plain film shows:
+Impression:
+-Increased infiltrations in both lungs. 
+-Atherosclerotic aorta. 
+-Normal heart size. 
+-Scoliosis, DJD and osteoporosis of spine."
+NLP_CHEST_068,4,0.103866614,0.061730534,0.03696594,0.15419297,0.053616203,0.029758286,0.046503846,0.082372904,0.095611416,0.12227231,0.058413614,0.040575717,0.10057552,0.013544009,"Chest plain film shows:
+Impression:
+-Increased infiltrations in both lungs. 
+-Tortuous atherosclerotic dilated aorta.
+-Normal heart size. 
+-DJD of spine. "
+NLP_CHEST_069,9,0.11978097,0.052595746,0.056796346,0.11480762,0.059473597,0.032383606,0.042971093,0.085407,0.12833348,0.11026128,0.050437618,0.044054978,0.086003706,0.016692998,"Chest AP view shows:
+Impression:
+-Bilateral lung centrilobular infiltrations. 
+Pulmonary TB cannot be excluded completely. 
+-Right pleural effusion.
+-The heart shadow is not enlarged.
+-S/P fixation in C-spine.
+-Atherosclerosis of aorta. 
+-Spondylosis. "
+NLP_CHEST_070,8,0.07356866,0.063169196,0.044515908,0.12183557,0.08600602,0.03424034,0.048336677,0.16404831,0.08262831,0.111570515,0.03449681,0.044556275,0.076476224,0.014551228,"Chest plain film shows:
+Impression:
+-Suspicious right middle lung patch. 
+-Increased infiltrations in both lungs.
+-Tortuous atherosclerotic dilated aorta.
+-Normal heart size. "
+NLP_CHEST_072,4,0.07825206,0.06023801,0.039552264,0.14773977,0.060889915,0.035745416,0.050652225,0.0636904,0.09606489,0.14382057,0.082522795,0.043339327,0.07710593,0.020386467,"Chest plain film shows:
+Impression:
+-Increased infiltrations in both lungs.
+-Blunting bilateral CP angles.
+ Elevated right hemidiaphragm. 
+-Tortuous atherosclerotic dilated aorta.
+-Cardiomegaly.
+-DJD of spine. 
+S/P fixation in L-spine. "
+NLP_CHEST_073,4,0.085186005,0.05720252,0.048523247,0.12925133,0.09524757,0.034287866,0.06112969,0.0908625,0.08430462,0.08822266,0.08798994,0.035424218,0.08288352,0.019484283,"
+Chest PA view shows:
+
+Impression: 
+>Bilateral lung markings increased.
+>No pleural effusion.
+>The heart shadow is enlarged.
+>The aortic shadow is atherosclerotic and tortuous. 
+>Bilateral apical pleural thickening. 
+>Surgical clips in upper abdomen. "
+NLP_CHEST_074,4,0.071862645,0.05019441,0.038567435,0.17393947,0.06505073,0.039135642,0.055373903,0.07088964,0.085229434,0.10655272,0.083573096,0.036518145,0.10592871,0.017184047,"Chest plain film shows:
+Impression:
+-Increased infiltrates in both lungs. 
+-Blunting bilateral CP angles. 
+-Cardiomegaly. 
+-Atherosclerosis of aorta. 
+-Scoliosis and DJD of spine. 
+-Bilateral apical pleural thickening. 
+"
+NLP_CHEST_075,4,0.092023276,0.052420788,0.04063655,0.15386099,0.075706996,0.0393873,0.047467783,0.07828654,0.080781795,0.12349931,0.052890312,0.043788653,0.09840971,0.020840108,"Chest plain film shows:
+Impression:
+-Increased both lung infiltrates. 
+ Bilateral hilar enlargement. 
+ Bilateral apical pleural thickening. 
+-Blunting bilateral CP angles. 
+-Atherosclerotic aorta. 
+-Scoliosis, DJD and osteoporosis of spine.
+-Compression fracture of T-L spine.
+-Calcified nodules in left upper abdomen.
+ S/P Rt jugular Perm-cath. 
+ S/P right pleural pigtail tube. "
+NLP_CHEST_076,4,0.09977691,0.043246686,0.025897663,0.14734681,0.07936026,0.025553845,0.041231703,0.095671326,0.119170435,0.105675004,0.07633866,0.02910805,0.09862209,0.013000594,"
+Chest plain film view showed:
+Impression:
+-Bilateral apical pleural thickening. 
+-Increased both lung infiltrates. 
+-Suspect bilateral hilar enlargement. 
+-Normal heart size.
+-DJD of spine. Scoliosis of spine. 
+-Atherosclerosis of aorta. 
+-S/P sternotomy with metallic wire fixation. "
+NLP_CHEST_077,4,0.10075359,0.038043268,0.032068387,0.12148488,0.10497705,0.04136532,0.059890598,0.11547984,0.09168316,0.093729354,0.039789263,0.04434681,0.10028559,0.016102921,"
+Chest plain film view showed:
+Impression:
+-Bilateral apical pleural thickening. 
+-Left lower lung subsegmental atelectasis. 
+-Blunting left CP angle. 
+-Bilateral hilar enlargement. 
+-Normal heart size.
+-DJD of spine. 
+-Mild scoliosis of spine. "
+NLP_CHEST_078,10,0.07081251,0.049147695,0.03977045,0.12907667,0.043535,0.03432376,0.03422945,0.06023214,0.12933627,0.15626483,0.071222484,0.046488326,0.11026047,0.02529989,"Chest plain film shows:
+
+Impression:
+-Right hilar enlargement. 
+-Blunting bilateral CP angles. 
+-Normal heart size. 
+-Atherosclerotic aorta.
+-Scoliosis and DJD of spine. 
+-Bilateral apical pleural thickening. "
+NLP_CHEST_079,4,0.0662325,0.054191966,0.03103165,0.15667911,0.07341553,0.028334796,0.04808202,0.08778044,0.11046921,0.11177893,0.087597944,0.03263708,0.08785197,0.023916818,"Chest AP View:
+Impression:
+-Susp. Rt pneumothorax. 
+-Increased bilateral lung infiltrates.
+-Blunting right CP angle. 
+-Elevated right hemidiaphragm. 
+-Normal heart size.
+-Spondylosis of spine.  
+-S/P Rt subclavian CVC insertion. 
+"
+NLP_CHEST_080,9,0.08287082,0.04620735,0.051713265,0.097810626,0.07821198,0.030074805,0.09200288,0.098835036,0.11189183,0.09116982,0.058417052,0.057925668,0.085567206,0.01730165,"Chest plain film view showed:
+Impression:
+-Sutures in right upper chest. 
+ Susp. Rt pneumothorax. 
+-The mediastinum is not widened.
+-Normal heart size.
+-DJD of spine.
+-S/P right chest tube insertion. 
+-Subcutaneous emphysema in bilateral neck and left chest walls. 
+-Atherosclerotic aorta. "
+NLP_CHEST_081,8,0.07875968,0.06053382,0.038370192,0.107972406,0.07271656,0.031219587,0.038883235,0.12776934,0.10764055,0.123975076,0.076553434,0.04311466,0.07295304,0.01953842,"Chest AP View:
+Impression:
+-Susp. Rt pneumothorax. 
+-Increased bilateral lung infiltrates.
+-Suspicious bilateral lung patches. 
+-Blunting right CP angle. 
+-Elevated right hemidiaphragm. 
+-Normal heart size.
+-Spondylosis of spine.  
+-S/P Lt jugular CVC insertion.  
+ S/P Rt subclavian CVC insertion. 
+"
+NLP_CHEST_082,10,0.10722261,0.055428237,0.048368577,0.12622517,0.06667203,0.03147538,0.044041,0.09922936,0.08761641,0.1354927,0.07788393,0.03919573,0.06250545,0.018643443,"Chest PA shows:
+Impression: 
+> Suspicious pulmonary edema. Superimposed pneumonia cannot be excluded. 
+  Suspicious bilateral lower lung patch. 
+  Blunting bilateral CP angles. 
+> Bilateral apical pleural thickening. 
+> Tortuous aorta. 
+> Scoliosis and DJD of spine. 
+> S/P tracheostomy and NG tube. 
+> S/P Lt jugular CVC insertion.
+> S/P right chest tube insertion. 
+> S/P left pleural pigtail tube. 
+  Susp. Lt pneumothorax.  "
+NLP_CHEST_083,4,0.083908945,0.048994653,0.035106797,0.17414743,0.059907995,0.03312275,0.036842216,0.05550502,0.12573804,0.13264361,0.07530074,0.036710564,0.08546508,0.016606174,"Chest AP view showed:
+1.s/p sternotomy and cardiac valve replacement 
+  with drainage tubes.
+  Enlarged heart size with tortuous aorta.
+2.Mild R't pneumothorax.
+  R't lower lung infiltrations.
+  s/p R't chest tube placement.
+3.No mediastinum widening.
+4.s/p endotracheal tube and NG intubation.
+  s/p R't jugular Swan-Ganz catheterization.
+"
+NLP_CHEST_084,4,0.08705187,0.056708217,0.02632353,0.13668013,0.06489263,0.031965334,0.0898687,0.09599354,0.078414805,0.10669751,0.088285886,0.033308636,0.07964504,0.024164148,"Chest AP view showed:
+1.Enlarged heart size with tortuous aorta.
+2.L't lung small nodules. 
+  A R't upper lung mass. 
+  R't hydropneumothorax s/p intrapleural pigtail drainage.
+3.No mediastinum widening.
+"
+NLP_CHEST_086,9,0.103221714,0.0610885,0.043590613,0.11794328,0.071579956,0.026494361,0.04455191,0.061079767,0.15479034,0.1180893,0.07833616,0.03145002,0.07228527,0.015498872,"Chest AP view showed:
+1.Normal heart size with tortuous aorta.
+2.s/p R't chest tube placement.
+3.No mediastinum widening.
+4.s/p endotracheal tube and NG intubation.
+  s/p L't subclavian port-A implantation 
+  and R't jugular CVP.
+"
+NLP_CHEST_087,10,0.08054255,0.05037882,0.030172555,0.1350926,0.058978185,0.024693666,0.045656726,0.09673392,0.0961442,0.14599462,0.08072719,0.031107506,0.10687209,0.01690542,"Chest AP view showed:
+1.Enlarged heart size with tortuous aorta.
+2.A L't basal lung small density.
+3.No mediastinum widening.
+4.s/p endotracheal tube and NG intubation.
+  s/p R't jugular CVP.
+"
+NLP_CHEST_088,4,0.07303086,0.04952812,0.03367957,0.16677193,0.046807438,0.024044523,0.048708353,0.06614564,0.13122088,0.14971004,0.06774847,0.020986091,0.10739518,0.014222995,"Chest AP view showed:
+1.Enlarged heart size with tortuous aorta.
+2.A L't basal lung small density.
+3.No mediastinum widening.
+4.s/p endotracheal tube and NG intubation 
+  with inadequate endotracheal tube position.
+  s/p R't jugular CVP.
+"
+NLP_CHEST_089,4,0.07115924,0.041215736,0.046611447,0.20741306,0.07019961,0.02605486,0.047684617,0.09509046,0.09419993,0.124116115,0.05059317,0.04330414,0.07022097,0.012136555,"Chest AP view showed:
+1.Normal heart size with tortuous aorta.
+2.R't middle lung and L't lower lung 
+  reticulonodular infiltrations.
+  Mild L't pleural effusion.
+3.No mediastinum widening.
+4.s/p endotracheal tube and NG intubation.
+  s/p R't jugular CVP.
+"
+NLP_CHEST_090,4,0.068516485,0.05542025,0.039995924,0.2323646,0.07400048,0.026117861,0.048185326,0.0736024,0.1119491,0.08817439,0.06617875,0.033612095,0.060402244,0.0214801,"Chest PA view showed:
+Impression:
+>Increased bilateral lung markings.
+>Normal heart size. 
+>Atherosclerotic aorta. 
+>Spondylosis.
+>Stent in left axillary region.
+>Calcified nodules in bilateral abdomen, consider bilateral renal stones.
+>Radiopaque lesions in right upper abdomen.
+>S/P NG and endotracheal tube.
+ S/P Rt jugular CVC insertion. 
+ S/P Rt jugular CVC insertion. "
+NLP_CHEST_091,10,0.10373411,0.044889025,0.026388774,0.12153524,0.082374655,0.034132924,0.060689095,0.081905074,0.0902712,0.14595398,0.06541257,0.031693757,0.09080931,0.020210328,"Chest PA view:
+Impression:
+-Increased both lung markings. 
+-Compatible with right lung nodules.
+-Fibrotic lesion in left upper lung.
+-Normal heart size. Atherosclerotic aorta. 
+-Suspect right pleural effusion.
+-Spondylosis. R/O osteoporosis. 
+-Compatible with multiple bony metastases.
+-S/P NG and endotracheal tube.
+-S/P Lt subclavian Port-A-cath. "
+NLP_CHEST_092,4,0.092023276,0.052420788,0.04063655,0.15386099,0.075706996,0.0393873,0.047467783,0.07828654,0.080781795,0.12349931,0.052890312,0.043788653,0.09840971,0.020840108,"Chest plain film shows:
+Impression:
+-Increased both lung infiltrates. 
+ Bilateral hilar enlargement. 
+ Bilateral apical pleural thickening. 
+-Blunting bilateral CP angles. 
+-Atherosclerotic aorta. 
+-Scoliosis, DJD and osteoporosis of spine.
+-Compression fracture of T-L spine.
+-Calcified nodules in left upper abdomen.
+ S/P Rt jugular Perm-cath. 
+ S/P right pleural pigtail tube. "
+NLP_CHEST_093,10,0.09416438,0.061968394,0.026036445,0.122758314,0.05877001,0.03569444,0.07071087,0.06572024,0.08943203,0.15927131,0.06364041,0.03476459,0.10153788,0.015530746,"Chest plain film view showed:
+Impression:
+-Suspicious pulmonary edema. Superimposed pneumonia cannot be excluded. 
+-The mediastinum is not widened.
+-Normal heart size.
+-DJD of spine.
+-S/P NG and endotracheal tube.
+-S/P Rt subclavian CVC insertion. "
+NLP_CHEST_094,4,0.09550949,0.055620335,0.032836027,0.16568454,0.056996614,0.04307369,0.053235978,0.07647295,0.0703385,0.16223085,0.05532444,0.025927514,0.087191634,0.019557422,"Chest plain film view showed:
+Impression:
+-Suspicious pulmonary edema. Superimposed pneumonia cannot be excluded. 
+-The mediastinum is not widened.
+-Normal heart size.
+-DJD of spine.
+-S/P NG and endotracheal tube.
+-S/P Rt subclavian CVC insertion. "
+NLP_CHEST_095,4,0.08451652,0.060642477,0.042443402,0.14148082,0.057335787,0.03357781,0.05722223,0.08113834,0.10561511,0.11079861,0.0641842,0.039427985,0.10305122,0.018565498,"Chest PA view:
+Impression:
+-Suspect pulmonary hypertension. 
+-Increased bilateral lung markings. 
+ Subsegmental atelectasis in both lower lungs.
+-Blunting bilateral CP angles. 
+-Spondylosis. Fracture of bilateral ribs.
+-Atherosclerotic aorta. 
+-S/P tracheostomy and NG tube. 
+ S/P Rt jugular CVC insertion. "
+NLP_CHEST_096,4,0.09679593,0.06993852,0.03961636,0.14453192,0.05772245,0.035545234,0.03541823,0.07973563,0.113957345,0.11957222,0.08616454,0.026032135,0.078105025,0.016864454,"Chest plain film shows:
+Impression:
+-No obvious lung patch, nodule or increased infiltration on X-ray. But if there is still clinically strong suspicion of lung nodule, chest CT may be arranged for further evaluation. 
+-No pleural effusion.
+-Normal heart size. 
+-Atherosclerotic aorta. 
+-Old fracture of bilateral ribs."
+NLP_CHEST_097,8,0.09195581,0.04220344,0.04903907,0.13152966,0.07791563,0.024106516,0.039238513,0.13722798,0.12130509,0.08068656,0.053369187,0.04587515,0.087849766,0.017697636,"Chest PA view shows:
+Impression: 
+- Fibronodular lesions and patch in bilateral apical lung field.
+- Blunted bilateral CP angles. 
+- Normal heart size. Atherosclerotic aorta. 
+- Spondylosis of spine. 
+- Suspect old fracture of right ribs.
+- S/P NG tube insertion.
+S- /P Rt subclavian Port-A-cath. "
+NLP_CHEST_098,4,0.08608607,0.059661455,0.049013674,0.18615173,0.057724524,0.028111318,0.044698626,0.062133122,0.09574041,0.12018395,0.074392624,0.03780271,0.07886807,0.019431666,"
+Chest PA view show: 
+Impression:
+-Increased infiltrations in both lungs.
+-Blunting left CP angle. 
+-Suspect bilateral lower lung patch.
+-Bilateral apical pleural thickening. 
+-Tortuous atherosclerotic aorta. 
+-Normal heart size. 
+-DJD of spine. 
+-Old fracture of left ribs. 
+-S/P pacemaker insertion. 
+-S/P NG and endotracheal tube. "
+NLP_CHEST_099,4,0.08962862,0.0475176,0.036775872,0.16323346,0.062050268,0.026934426,0.050254237,0.07967326,0.09325373,0.12494294,0.1121244,0.030471386,0.06509264,0.018047174,"
+Chest plain film shows:
+Impression:
+-Compatible with right-sided aortic arch with aberrant left subclavian artery and Kommerell diverticulum.
+-Suspect bilateral lower lung patches. 
+-Increased infiltrations in both lungs.
+-Blunting bilateral CP angles.
+-Tortuous atherosclerotic dilated aorta.
+-Cardiomegaly.
+-Scoliosis, DJD and osteoporosis of spine.
+ Fracture of right ribs. 
+S/P Rt subclavian CVC insertion. "
