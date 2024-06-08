@@ -1,4 +1,5 @@
 import torch
+import regex as re
 from data.prepare import *
 from utils.config import *
 
@@ -55,7 +56,8 @@ def generate_report(model, context=None):
     context = preprocess_text(context)
     context_tokens = encode(context)
     context = torch.tensor([context_tokens], dtype=torch.long, device=config.device)
-    print(decode(model.generate(context, max_new_tokens=60)[0].tolist()))
+    report = (decode(model.generate(context, max_new_tokens=60)[0].tolist()))
+    return re.sub('\[CLS\]', '', report)
 
 def load_checkpoint(model, path=None):
     assert path is not None
