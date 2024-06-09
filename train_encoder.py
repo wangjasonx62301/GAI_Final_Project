@@ -5,6 +5,8 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
+from PIL import Image
+import torchvision.transforms as transforms
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -13,19 +15,32 @@ from utils.config import config
 from model.text_model import Encoder
 
 class CombinedDataset(Dataset):
-    def __init__(self, data, tokenizer, scaler, max_length=128):
+    def __init__(self, data, tokenizer, scaler, img_dir, max_length=128):
         self.image_features = data[['class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6', 'class_7', 'class_8', 'class_9', 'class_10', 'class_11', 'class_12', 'class_13', 'class_14']].values
         self.texts = data['text'].values
+        self.image_names = data['name'].values 
         self.labels = data[['class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6', 'class_7', 'class_8', 'class_9', 'class_10', 'class_11', 'class_12', 'class_13', 'class_14']].values
         self.tokenizer = tokenizer
         self.scaler = scaler
         self.max_length = max_length
+        self.img_dir = img_dir
+        self.transform = transforms.Compose([
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+            transforms.Grayscale(num_output_channels=1),
+        ])
         self.scaled_image_features = self.scaler.transform(self.image_features)
     
     def __len__(self):
         return len(self.texts)
     
     def __getitem__(self, idx):
+        image_name = self.image_names[idx].strip().replace('\r', '').replace('\n', '').replace(' ', '_')
+        img_path = os.path.join(self.img_dir, f"{image_name}_1_1.png")
+        image = Image.open(img_path).convert('RGB')
+        image = self.transform(image)
         image_features = torch.tensor(self.scaled_image_features[idx], dtype=torch.float)
         text = self.texts[idx]
         encoded_text = self.tokenizer.encode(preprocess_text(text))
@@ -34,8 +49,8 @@ class CombinedDataset(Dataset):
         else:
             encoded_text = encoded_text[:self.max_length]
         text_features = torch.tensor(encoded_text, dtype=torch.long)
-        label = torch.tensor(self.labels[idx], dtype=torch.long)
-        return (image_features, text_features), label
+        label = torch.tensor(self.labels[idx], dtype=torch.float)
+        return (image, text_features), label
 
 train_file_path = './dataset/merged_reports_train.csv'
 valid_file_path = './dataset/merged_reports_valid.csv'
@@ -48,8 +63,8 @@ scaler.fit(train_data[['class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'c
 vocab_dict = create_dict()
 tokenizer = CustomTokenizer(vocab_dict)
 
-train_dataset = CombinedDataset(train_data, tokenizer, scaler)
-valid_dataset = CombinedDataset(valid_data, tokenizer, scaler)
+train_dataset = CombinedDataset(train_data, tokenizer, scaler, img_dir='./CXIRG_Data/train_data/images')
+valid_dataset = CombinedDataset(valid_data, tokenizer, scaler, img_dir='./CXIRG_Data/valid_data/images')
 
 train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True)
 val_loader = DataLoader(valid_dataset, batch_size=config.batch_size, shuffle=False)
@@ -64,19 +79,15 @@ train_losses = []
 val_losses = []
 val_accuracies = []
 
-for epoch in range(config.max_iters):
+for epoch in range(config.max_iters): # 
     model.train()
     running_loss = 0.0
     for batch in train_loader:
-        (image_features, text_features), labels = batch
-        print(labels.shape)
-        image_features, text_features, labels = image_features.to(config.device), text_features.to(config.device), labels.to(config.device)
+        (images, text_features), labels = batch
+        images, text_features, labels = images.to(config.device), text_features.to(config.device), labels.to(config.device)
 
         optimizer.zero_grad()
-        # inputs = torch.cat((image_features, text_features), dim=1)
-        inputs = text_features
-        # print(inputs.shape)
-        outputs, loss = model(inputs, targets=labels)
+        outputs, loss = model(idx=text_features, img=images, targets=labels)
         loss.backward()
         optimizer.step()
         running_loss += loss.item()
@@ -90,13 +101,13 @@ for epoch in range(config.max_iters):
         total = 0
         with torch.no_grad():
             for batch in val_loader:
-                (image_features, text_features), labels = batch
-                image_features, text_features, labels = image_features.to(config.device), text_features.to(config.device), labels.to(config.device)
-                inputs = torch.cat((image_features, text_features), dim=1)
-                outputs, loss = model(inputs, targets=labels)
+                (images, text_features), labels = batch
+                images, text_features, labels = images.to(config.device), text_features.to(config.device), labels.to(config.device)
+                outputs, loss = model(idx=text_features, img=images, targets=labels)
                 val_loss += loss.item()
-                _, predicted = torch.max(outputs.data, 1)
-                total += labels.size(0)
+                # _, predicted = torch.max(outputs.data, 1)
+                predicted = (outputs > 0.5).float()
+                total += labels.numel()
                 correct += (predicted == labels).sum().item()
         val_losses.append(val_loss / len(val_loader))
         val_accuracies.append(correct / total)
