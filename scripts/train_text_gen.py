@@ -52,11 +52,11 @@ def generate_report(model, context=None):
     
     encode = lambda s : [config.stoi[c] for c in s]
     decode = lambda l : ''.join([config.itos[i] for i in l])
-    if context == None: context = '[CLS]'
+    if context == None: context = ''
     context = preprocess_text(context)
     context_tokens = encode(context)
     context = torch.tensor([context_tokens], dtype=torch.long, device=config.device)
-    report = (decode(model.generate(context, max_new_tokens=60)[0].tolist()))
+    report = (decode(model.generate(context, max_new_tokens=64)[0].tolist()))
     return re.sub('\[CLS\]', '', report)
 
 def load_checkpoint(model, path=None):
