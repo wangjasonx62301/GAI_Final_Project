@@ -27,3 +27,4 @@ class config():
     max_padding    : int = 128
     max_length     : int = 128
     encoder_fan_out: int = 14
+    image_size     : int = 224

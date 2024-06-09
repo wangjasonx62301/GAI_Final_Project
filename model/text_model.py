@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 import math
 from utils.config import config
-
+import regex as re
 
 class SinusoidalEmbedding(nn.Module):
     
@@ -111,7 +111,7 @@ class Decoder(nn.Module):
         self.device = config.device
         self.block_size = config.block_size
         
-    def forward(self, idx, targets=None):
+    def forward(self, idx, targets=None, img_features=None):
         
         B, T = idx.shape
         
@@ -133,18 +133,60 @@ class Decoder(nn.Module):
         
         return logits, loss
     
-    def generate(self, idx, max_new_tokens):
+    def generate(self, idx, max_new_tokens, img_features=None):
         # idx is (B, T)
         for _ in range(max_new_tokens):
             # get predictions
             idx_cond = idx[:, -self.block_size:] # prevent longer block_size, because we just have pos. embd
-            logits, loss = self(idx_cond) # now (B, T, C)
+            logits, loss = self(idx=idx_cond, img_features=img_features) # now (B, T, C)
             logits = logits[:, -1, :] # now get the last step and shape (B, C)
             probs = F.softmax(logits, dim=-1)
             idx_next = torch.multinomial(probs, num_samples=1) # (B, 1)
             idx = torch.cat((idx, idx_next), dim=1) # (B, T+1)
         return idx
+
+    def generate_report(self, context=None, preprocess_text=None, img_features=None):
     
+        encode = lambda s : [config.stoi[c] for c in s]
+        decode = lambda l : ''.join([config.itos[i] for i in l])
+        if context == None: context = ''
+        context = preprocess_text(context)
+        context_tokens = encode(context)
+        context = torch.tensor([context_tokens], dtype=torch.long, device=config.device)
+        report = (decode(self.generate(context, max_new_tokens=64, img_features=img_features)[0].tolist()))
+        return re.sub('\[CLS\]', '', report)    
+
+class FeatureExtracter(nn.Module):
+    
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        self.conv_layers = nn.Sequential(
+            nn.Conv2d(1, 2, kernel_size=3, stride=1, padding=1),  
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2), 
+            nn.Conv2d(2, 4, kernel_size=3, stride=1, padding=1), 
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2),  
+            nn.Conv2d(4, 8, kernel_size=3, stride=1, padding=1),  
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2), 
+            nn.Conv2d(8, 8, kernel_size=3, stride=1, padding=1),  
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+        )
+        self.fc_layers = nn.Sequential(
+            nn.Linear(8 * 14 * 14, 128 * self.config.n_embd), 
+            nn.ReLU()
+        )
+    
+    def forward(self, x):
+        B, C, H, W = x.shape
+        x = self.conv_layers(x)
+        x = x.view(B, 1, -1)  
+        x = self.fc_layers(x)
+        x = x.view(B, 128, self.config.n_embd)  
+        return x
 
 class Encoder(nn.Module):
     
@@ -154,25 +196,35 @@ class Encoder(nn.Module):
         if sinusoidal_embedding == True:
             self.position_embedding_table = SinusoidalEmbedding(config.max_padding, config.n_embd)
         else : self.position_embedding_table = torch.nn.Embedding(config.max_padding, config.n_embd)
+        self.fx = FeatureExtracter(config)
         # make sure encoder term
         self.blocks = nn.Sequential(*[Block(config, encoder_term=True) for _ in range(config.n_layer)])
-        self.lm_head = nn.Linear(config.n_embd, config.encoder_fan_out)
+        self.lm_head = nn.Sequential(
+            nn.Linear(config.n_embd, config.encoder_fan_out),
+            nn.ReLU(),
+        )
+        self.l_out = nn.Linear(config.max_padding * config.encoder_fan_out, config.encoder_fan_out)
         self.device = config.device
         self.block_size = config.max_padding
         
-    def forward(self, idx, targets=None):
+    def forward(self, idx=None, img=None, targets=None):
         
-        B, T = idx.shape
         
-        tok_emb = self.token_embedding_table(idx)
-        pos_emb = self.position_embedding_table(torch.arange(T, device=self.device)) # (T, C)
-        x = tok_emb + pos_emb # (B, T, C)
-        
+        imf = self.fx(img)
+        if idx != None:
+            B, T = idx.shape
+            tok_emb = self.token_embedding_table(idx)
+            pos_emb = self.position_embedding_table(torch.arange(T, device=self.device)) # (T, C)
+            x = 0.1 * (tok_emb + pos_emb) + 0.9 * imf # (B, T, C)
+        else: 
+            B, T, C = imf.shape
+            x = imf
         x = self.blocks(x)
-        logits = self.lm_head(x) # (B, T, fan_out(14))
+        x = self.lm_head(x).view(B, -1) # (B, T * fan_out(14))
+        logits = self.l_out(x)
         if targets == None:
             loss = None
         else:
-            loss = F.cross_entropy(logits, targets)
+            loss = F.mse_loss(logits, targets)
         
         return logits, loss
