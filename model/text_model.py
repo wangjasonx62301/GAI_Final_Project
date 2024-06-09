@@ -117,8 +117,9 @@ class Decoder(nn.Module):
         
         tok_emb = self.token_embedding_table(idx)
         pos_emb = self.position_embedding_table(torch.arange(T, device=self.device)) # (T, C)
-        x = tok_emb + pos_emb # (B, T, C)
-        
+        x = tok_emb + pos_emb # (B, T, C) (8, 8, 512)
+        if img_features != None:
+            x += img_features
         x = self.blocks(x)
         logits = self.lm_head(x) # (B, T, vocab_size)
         
@@ -208,7 +209,7 @@ class Encoder(nn.Module):
         self.block_size = config.max_padding
         
     def forward(self, idx=None, img=None, targets=None):
-        
+        # make sure whole img is input, and img requires transform
         
         imf = self.fx(img)
         if idx != None:
@@ -221,7 +222,7 @@ class Encoder(nn.Module):
             x = imf
         x = self.blocks(x)
         x = self.lm_head(x).view(B, -1) # (B, T * fan_out(14))
-        logits = self.l_out(x)
+        logits = self.l_out(x)          # (B, fan_out(14))
         if targets == None:
             loss = None
         else:
