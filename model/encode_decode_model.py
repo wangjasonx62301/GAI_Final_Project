@@ -39,7 +39,7 @@ class EncoderDecoderModel(nn.Module):
         # print(img_features.shape)
         
         out = self.decoder.generate(idx=torch.tensor([config.stoi['[CLS]']], dtype=torch.long, device=config.device).view(1, -1),
-                                    img_features=img_features, max_new_tokens=100)
+                                    img_features=img_features, max_new_tokens=64)
         if targets == None:
             loss = None
         else:
@@ -49,3 +49,9 @@ class EncoderDecoderModel(nn.Module):
             loss = F.cross_entropy(out, targets)
             
         return out, loss
+    
+    def generate(self, img):
+        out, loss = self(img, targets=None)
+        decode = lambda l : ''.join([config.itos[i] for i in l])
+        report = (decode(out[0].tolist()))
+        return re.sub('\[CLS\]', '', report)
