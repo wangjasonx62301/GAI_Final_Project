@@ -44,13 +44,12 @@ class EncoderDecoderModel(nn.Module):
         if targets == None:
             loss = None
         else:
-            if type(targets[0]) == str:
-                for i in targets:
-                    targets[i] = torch.tensor(self.tokenizer.encode(preprocess_text(targets[i]))).to(self.config.device)
-                    if len(targets[i]) < self.config.max_padding:
-                        targets[i] = F.pad(targets[i], (0, self.config.max_padding - len(targets[i])), value=self.config.stoi['[PAD]'])
-                    elif len(targets[i]) > self.config.max_padding:
-                        targets[i] = targets[i, :self.config.max_padding]
+            if type(targets) == str:
+                targets = torch.tensor(self.tokenizer.encode(preprocess_text(targets))).to(self.config.device)
+                if len(targets) < self.config.max_padding:
+                    targets = F.pad(targets, (0, self.config.max_padding - len(targets)), value=self.config.stoi['[PAD]'])
+                elif len(targets) > self.config.max_padding:
+                    targets = targets[:self.config.max_padding]
                     
             B, T = out.shape
             if T < self.config.max_padding:
