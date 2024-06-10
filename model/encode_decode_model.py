@@ -46,7 +46,7 @@ class EncoderDecoderModel(nn.Module):
         else:
             if type(targets[0]) == str:
                 for i in targets:
-                    targets[i] = self.tokenizer.encode(preprocess_text(targets[i]))
+                    targets[i] = torch.tensor(self.tokenizer.encode(preprocess_text(targets[i]))).to(self.config.device)
                     if len(targets[i]) < self.config.max_padding:
                         targets[i] = F.pad(targets[i], (0, self.config.max_padding - len(targets[i])), value=self.config.stoi['[PAD]'])
                     elif len(targets[i]) > self.config.max_padding:
