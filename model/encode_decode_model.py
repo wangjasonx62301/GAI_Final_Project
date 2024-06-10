@@ -29,6 +29,7 @@ class EncoderDecoderModel(nn.Module):
         self.decoder.eval()
         self.ffwd = EnFeedForward(config)
         self.config = config
+        self.tokenizer = CustomTokenizer(create_dict())
         
     def forward(self, img, targets=None):
         # can only input batch_size = 1, need to improve
@@ -43,6 +44,14 @@ class EncoderDecoderModel(nn.Module):
         if targets == None:
             loss = None
         else:
+            if type(targets[0]) == str:
+                for i in targets:
+                    targets[i] = self.tokenizer.encode(preprocess_text(targets[i]))
+                    if len(targets[i]) < self.config.max_padding:
+                        targets[i] = F.pad(targets[i], (0, self.config.max_padding - len(targets[i])), value=self.config.stoi['[PAD]'])
+                    elif len(targets[i]) > self.config.max_padding:
+                        targets[i] = targets[i, :self.config.max_padding]
+                    
             B, T = out.shape
             if T < self.config.max_padding:
                 out = F.pad(out, (0, self.config.max_padding - len(out)), value=self.config.stoi['[PAD]'])
