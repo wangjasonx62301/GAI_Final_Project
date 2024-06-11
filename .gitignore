@@ -1,2 +1,4 @@
 CXIRG_Data
 __pycache__
+model_*
+train_test.py

@@ -79,7 +79,7 @@ train_losses = []
 val_losses = []
 val_accuracies = []
 
-for epoch in range(config.max_iters): # 
+for epoch in range(2000): # 
     model.train()
     running_loss = 0.0
     for batch in train_loader:
@@ -93,8 +93,9 @@ for epoch in range(config.max_iters): #
         running_loss += loss.item()
     
     train_losses.append(running_loss / len(train_loader))
+    print(f'Epoch {epoch}, Training Loss: {running_loss / len(train_loader)}')
     
-    if epoch % config.eval_ival == 0:
+    if epoch % 100 == 0:
         model.eval()
         val_loss = 0
         correct = 0

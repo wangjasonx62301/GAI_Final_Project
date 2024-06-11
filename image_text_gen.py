@@ -30,9 +30,13 @@ def valid_rouge_score(model, df, image_directory):
         img = Image.open(image_path).convert('RGB')
         img = transform(img).unsqueeze(0).to(config.device)
         report = model.generate(img)
+        print(row['name'])
+        print("======================")
+        print(report)
+        print("======================")
         evaluate_score(report, row['text'])
 
-epochs = 1000
+epochs = 100
 
 def train_image_text(model, optim, train_df, valid_df, train_image_dir, valid_image_dir):
     model.to(config.device)
@@ -57,11 +61,12 @@ def train_image_text(model, optim, train_df, valid_df, train_image_dir, valid_im
             loss.backward()
             optim.step()
         
-        if iter % 100 == 0:
+        print(iter)
+        if iter % 1 == 0:
             print(f'{iter} / {epochs} training loss : {loss}')
             valid_rouge_score(model, valid_df, valid_image_dir)
         
-        if iter % 200 == 0 and iter > 0:
+        if iter % 10 == 0 and iter > 0:
             torch.save(model.state_dict(), f'image_gen_report_for_{iter}_iters.pt')
         
     model.eval()

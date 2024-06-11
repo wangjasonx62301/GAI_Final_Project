@@ -50,11 +50,20 @@ class EncoderDecoderModel(nn.Module):
                     targets = F.pad(targets, (0, self.config.max_padding - len(targets)), value=self.config.stoi['[PAD]'])
                 elif len(targets) > self.config.max_padding:
                     targets = targets[:self.config.max_padding]
-                    
+            
+            
+            # print(out.shape)
+            # print(targets.shape)
             B, T = out.shape
             if T < self.config.max_padding:
-                out = F.pad(out, (0, self.config.max_padding - len(out)), value=self.config.stoi['[PAD]'])
-            loss = F.cross_entropy(out, targets)
+                out = F.pad(out, (0, self.config.max_padding - T), value=self.config.stoi['[PAD]'])
+
+            # print(out.shape)
+            # print(targets.shape)
+            targets = targets.view(1, -1)
+            out = out.to(torch.float32)
+            out.requires_grad=True
+            loss = F.cross_entropy(out.to(torch.float32), targets.to(torch.float32))
             
         return out, loss
     
