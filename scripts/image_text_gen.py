@@ -8,7 +8,7 @@ from rouge_score import rouge_scorer
 from scripts.train_text_gen import *
 import torchvision.transforms as transforms
 from PIL import Image
-import pandas as pd
+from utils.config import *
 
 def evaluate_score(gen_text, targets):
     scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
@@ -32,9 +32,8 @@ def valid_rouge_score(model, df, image_directory):
         report = model.generate(img)
         evaluate_score(report, row['text'])
 
-epochs = 1000
 
-def train_image_text(model, optim, train_df, valid_df, train_image_dir, valid_image_dir):
+def train_image_text(model, optim, train_df, valid_df, train_image_dir, valid_image_dir, epochs=1000):
     model.to(config.device)
     model.train()
     
@@ -68,21 +67,27 @@ def train_image_text(model, optim, train_df, valid_df, train_image_dir, valid_im
     valid_rouge_score(model, valid_df, valid_image_dir)
     torch.save(model.state_dict(), f'text_gen_train_for_{epochs}_iters.pt')
 
-train_csv_path = './dataset/merged_reports_train.csv'
-valid_csv_path = './dataset/merged_reports_valid.csv'
+def get_submission(model):
+    df = pd.DataFrame(columns=['name', 'text'])
+    for index, row in config.valid_df.iterrows():
+        image_path = f"{config.valid_image_dir}/{row['name']}_1_1.png"
+        img = Image.open(image_path).convert('RGB')
+        img = config.transform(img).unsqueeze(0).to(config.device)
+        report = model.generate(img)
+        print('===================================')
+        name_ = row['name']
+        print(f'{name_}')
+        evaluate_score(report, row['text'])
+        df.loc[index] = [name_] + [report]
+    df.to_csv('submission.csv')
+    # break
 
-train_df = pd.read_csv(train_csv_path)
-valid_df = pd.read_csv(valid_csv_path)
+# encoder = Encoder(config).to(config.device)
+# # load_checkpoint(encoder, './encoder.pt')
 
-train_image_dir = './CXIRG_Data/train_data/images'
-valid_image_dir = './CXIRG_Data/valid_data/images'
+# decoder = Decoder(config).to(config.device)
+# # load_checkpoint(decoder, './decoder.pt')
+# model = EncoderDecoderModel(encoder=encoder, decoder=decoder, config=config).to(config.device)
+# optim = torch.optim.AdamW(model.parameters(), lr=config.lr)
 
-encoder = Encoder(config).to(config.device)
-load_checkpoint(encoder, './encoder.pt')
-
-decoder = Decoder(config).to(config.device)
-load_checkpoint(decoder, './decoder.pt')
-model = EncoderDecoderModel(encoder=encoder, decoder=decoder, config=config).to(config.device)
-optim = torch.optim.AdamW(model.parameters(), lr=config.lr)
-
-train_image_text(model, optim, train_df, valid_df, train_image_dir, valid_image_dir)
+# train_image_text(model, optim, config.train_df, config.valid_df, config.train_image_dir, config.valid_image_dir)

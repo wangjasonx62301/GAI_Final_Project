@@ -45,7 +45,7 @@ class EncoderDecoderModel(nn.Module):
             loss = None
         else:
             if type(targets) == str:
-                targets = torch.tensor(self.tokenizer.encode(preprocess_text(targets))).to(self.config.device)
+                targets = torch.tensor(self.tokenizer.encode(preprocess_text(targets))).to(self.config.device).to(torch.int64)
                 if len(targets) < self.config.max_padding:
                     targets = F.pad(targets, (0, self.config.max_padding - len(targets)), value=self.config.stoi['[PAD]'])
                 elif len(targets) > self.config.max_padding:
@@ -53,7 +53,7 @@ class EncoderDecoderModel(nn.Module):
                     
             B, T = out.shape
             if T < self.config.max_padding:
-                out = F.pad(out, (0, self.config.max_padding - len(out)), value=self.config.stoi['[PAD]'])
+                out = F.pad(out, (0, self.config.max_padding - len(out)), value=self.config.stoi['[PAD]']).to(torch.int64)
             loss = F.cross_entropy(out, targets)
             
         return out, loss

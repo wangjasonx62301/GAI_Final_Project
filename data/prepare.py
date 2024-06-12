@@ -5,6 +5,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset
 import random
+from utils.config import *
+from PIL import Image
+import os
 
 def preprocess_text(text):
     # get start token
@@ -112,7 +115,38 @@ class CustomReportDataset(Dataset):
     # def decode(self, tokens):
     def __len__(self):
         return len(self.df)
-        
+
+class CombinedDataset(Dataset):
+    def __init__(self, data, tokenizer, img_dir, config, max_length=128):
+        self.image_features = data[['class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6', 'class_7', 'class_8', 'class_9', 'class_10', 'class_11', 'class_12', 'class_13', 'class_14']].values
+        self.texts = data['text'].values
+        self.image_names = data['name'].values 
+        self.labels = data[['class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6', 'class_7', 'class_8', 'class_9', 'class_10', 'class_11', 'class_12', 'class_13', 'class_14']].values
+        self.tokenizer = tokenizer
+        self.scaler = config.scaler
+        self.max_length = max_length
+        self.img_dir = img_dir
+        self.transform = config.transform
+        self.scaled_image_features = self.scaler.transform(self.image_features)
+    
+    def __len__(self):
+        return len(self.texts)
+    
+    def __getitem__(self, idx):
+        image_name = self.image_names[idx].strip().replace('\r', '').replace('\n', '').replace(' ', '_')
+        img_path = os.path.join(self.img_dir, f"{image_name}_1_1.png")
+        image = Image.open(img_path).convert('RGB')
+        image = self.transform(image)
+        image_features = torch.tensor(self.scaled_image_features[idx], dtype=torch.float)
+        text = self.texts[idx]
+        encoded_text = self.tokenizer.encode(preprocess_text(text))
+        if len(encoded_text) < self.max_length:
+            encoded_text += [0] * (self.max_length - len(encoded_text))  # padding
+        else:
+            encoded_text = encoded_text[:self.max_length]
+        text_features = torch.tensor(encoded_text, dtype=torch.long)
+        label = torch.tensor(self.labels[idx], dtype=torch.float)
+        return (image, text_features), label
         
 def CustomBlockSeq2Batch(df, config, target_idx=None, valid=False):
     
