@@ -102,10 +102,6 @@ jupyter notebook demo.ipynb
 
 - **Config**: Configuration settings are managed in `utils/config.py`
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Acknowledgments
 
 - [PyTorch](https://pytorch.org/)
